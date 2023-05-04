@@ -106,6 +106,15 @@ app.get('/about',
   }
 )
 
+app.get("/bisrat", 
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('bisrat');
+  }
+)
+
+
+
 app.use(toDoRouter);
 app.use(weatherRouter);
 
