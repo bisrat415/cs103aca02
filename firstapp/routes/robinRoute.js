@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Poem = require('../models/poem');
+const translate = require('../models/translate');
 const User = require('../models/User');
 require('dotenv').config();
 // const openai = require('openai');
@@ -10,7 +10,9 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const gpt = new GPT(OPENAI_API_KEY);
 
 const get_response = async (prompt) => {
-    const completePrompt = `Write a poem about this topic, have a catchy title at the beginning: ${prompt} `;
+    const completePrompt = `Translate the given text into the language inputted by the user, it will
+    be of the form "language, text". If there is no language provided,
+    translate the text into giberish: ${prompt} `;
     const response = await gpt.complete({
         engine: 'text-davinci-003',
         prompt: completePrompt,
@@ -21,24 +23,24 @@ const get_response = async (prompt) => {
 
 };
 
-router.get('/poem',
+router.get('/translate',
     isLoggedIn,
     async(req, res, next) => {
-        res.render('poem');
+        res.render('translate');
     });
 
-router.post('/poem',
+router.post('/translate',
     isLoggedIn,
     async(req, res, next) => {
-        const topic = req.body.poem;
-        const poem = await get_response(topic);
-        const newPoem = new Poem({
-            title: req.body.topic,
-            content: poem,
+        const input = req.body.input;
+        const translation = await get_response(input);
+        const newTranslation = new translate({
+            actualInput: input,
+            translation: translation,
             dateGenerated: Date.now(),
         });
-        newPoem.save();
-        res.render('poemResult', { poem: poem });
+        newTranslation.save();
+        res.render('translateResult', { translation: translation });
     }
 );
 
