@@ -7,6 +7,7 @@ const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
+const bisratRouter = require('./routes/bisratRoute');
 
 const User = require('./models/User');
 
@@ -106,15 +107,18 @@ app.get('/about',
   }
 )
 
-app.get("/bisrat", 
+app.get('/poem', 
   isLoggedIn,
   (req,res,next) => {
-    res.render('bisrat');
+    res.render('poem');
   }
 )
 
 
 
+
+
+app.use(bisratRouter);
 app.use(toDoRouter);
 app.use(weatherRouter);
 
