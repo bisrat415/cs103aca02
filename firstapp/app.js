@@ -9,6 +9,8 @@ const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
 const bisratRouter = require('./routes/bisratRoute');
 const talRouter = require('./routes/talRoute');
+const ianRouter = require('./routes/ianRoute');
+
 
 const User = require('./models/User');
 
@@ -138,6 +140,7 @@ app.use(bisratRouter);
 app.use(talRouter);
 app.use(toDoRouter);
 app.use(weatherRouter);
+app.use(ianRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
