@@ -9,7 +9,7 @@ const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
 const bisratRouter = require('./routes/bisratRoute');
 const talRouter = require('./routes/talRoute');
-
+const robinRouter = require('./routes/robinRoute');
 const User = require('./models/User');
 
 /* **************************************** */
@@ -123,17 +123,22 @@ app.get('/team',
 
   
 
-app.get('/poem', 
-  isLoggedIn,
-  (req,res,next) => {
-    res.render('poem');
-  }
-)
+// app.get('/poem', 
+//   isLoggedIn,
+//   (req,res,next) => {
+//     res.render('poem');
+//   }
+// )
+
+// app.get('/translate', 
+//   isLoggedIn,
+//   (req,res,next) => {
+//     res.render('translate');
+//   }
+// )
 
 
-
-
-
+app.use(robinRouter);
 app.use(bisratRouter);
 app.use(talRouter);
 app.use(toDoRouter);
