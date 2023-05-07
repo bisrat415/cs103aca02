@@ -8,6 +8,7 @@ const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
 const bisratRouter = require('./routes/bisratRoute');
+const talRouter = require('./routes/talRoute');
 
 const User = require('./models/User');
 
@@ -106,6 +107,21 @@ app.get('/about',
     res.render('about');
   }
 )
+app.get('/everyone',
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('everyone');
+  }
+)
+
+app.get('/team',
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('team');
+  }
+)
+
+  
 
 app.get('/poem', 
   isLoggedIn,
@@ -119,6 +135,7 @@ app.get('/poem',
 
 
 app.use(bisratRouter);
+app.use(talRouter);
 app.use(toDoRouter);
 app.use(weatherRouter);
 
