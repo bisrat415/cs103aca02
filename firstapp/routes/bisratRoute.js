@@ -31,11 +31,9 @@ router.post('/poem',
     isLoggedIn,
     async(req, res, next) => {
         const topic = req.body.poem;
-        console.log(topic);
         const poem = await get_response(topic);
-        console.log(poem);
         const newPoem = new Poem({
-            title: req.body.topic,
+            title: topic,
             content: poem,
             dateGenerated: Date.now(),
         });
