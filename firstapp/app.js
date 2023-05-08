@@ -11,7 +11,7 @@ const bisratRouter = require('./routes/bisratRoute');
 const talRouter = require('./routes/talRoute');
 const robinRouter = require('./routes/robinRoute');
 const User = require('./models/User');
-
+const ianRouter = require('./routes/ianRoute'); 
 /* **************************************** */
 /*  Connecting to a Mongo Database Server   */
 /* **************************************** */
@@ -137,7 +137,7 @@ app.get('/team',
 //   }
 // )
 
-
+app.use(ianRouter);
 app.use(robinRouter);
 app.use(bisratRouter);
 app.use(talRouter);
